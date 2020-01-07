@@ -1,0 +1,27 @@
+﻿enclave {
+    trusted {
+        /* define ECALLs here. */
+	include "ext.h"
+        public void initialize(int arrsize, int oram_type);  // Create the key for AES encryption
+
+	// pass the input array to enclave
+	public void passAllValues([in, size=len] Block *input,size_t len);
+
+	// pass client message to enclave
+	public void passMessageFromClient([in, size=len] Block *input,size_t len);
+
+	// get the input array from enclave
+	public void getAllValues([out, size=len] Block *input,size_t len);
+
+	// get client message from enclave
+	public void getMessageToClient([out, size=len] Block *input,size_t len);
+	public void freeMem();
+	public void reSetComCounter();
+    };
+
+    untrusted {
+        /* define OCALLs here. */
+    	include "ext.h"
+        void ocall_print_string([in, string] const char *str);	
+    };
+};

@@ -1,0 +1,53 @@
+﻿enclave {
+    trusted {
+        /* define ECALLs here. */
+	include "ext.h"
+	//include "ModulExponentiation.h"
+
+	// Create the key for AES encryption	
+        public void initialize(int arrsize,int EXTRAsize, int totallength,bool reinitial);  
+
+	public void reinitialize([in,size=len]  Block *input,size_t len); // for square root ORAM    
+
+	// pass the input array to enclave
+	public void passAllValues([in, size=len] Block *input,size_t len);
+
+
+	public void passAddress([in,size=len] Block **input,char c,size_t len);
+
+	// pass client message to enclave
+	public void passMessageFromClient([in, size=len] Block *input,size_t len);
+
+	// get the input array from enclave
+	public void getAllValues([out, size=len] Block *input,size_t len);
+
+	// get the input array from enclave    
+	public void getAllValuesT([out, size=len] Block *input,size_t len);
+
+
+	// get client message from enclave
+	public void getMessageToClient([out, size=len] Block *input,size_t len);
+
+
+	// get message from enclave to server
+	public void getMessageToServer([out, size=len] Block *input,size_t len);
+
+	// pass client message to enclave
+	public void passMessageFromServer([in, size=len] Block *input,size_t len);
+
+	public void freeMem();
+
+	public void send_T_To_Enclave([in, size=len] Block *input, size_t len,int cycles,bool isLast);
+
+	public void send_All_T_To_Enclave(int size_of_bigT,int Cycles,int ob_logN);
+    };
+
+    untrusted {
+        /* define OCALLs here. */
+    	include "ext.h"
+
+        void ocall_print_string([in, string] const char *str);
+	void put_in_BigT_OneByOne([in, size=len] Block* input, unsigned long index, size_t len);
+	void copy_T_To_A_Host([in, size=len] Block *input,size_t len,int packet_id,int TotalLen);
+    };
+};
