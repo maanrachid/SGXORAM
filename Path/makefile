@@ -10,8 +10,8 @@ WOLF_LIB_Enclave_PATH = /home/sgx/wolfssl/IDE/LINUX-SGX
 WOLF_LIB_Enclave = wolfssl.sgx.static.lib
 WOLF_LIB_Client = wolfssl
 WOLF_D = WOLFSSL_SGX
-TARGET_LIB_CLIENT = $(WOLF_LIB_Client)
-TARGET_LIB_ENCLAVE = $(WOLF_LIB_Enclave)
+TARGET_LIB_CLIENT = $(IPP_LIB_Client)
+TARGET_LIB_ENCLAVE = $(IPP_LIB_Enclave)
 
 
 client:	server
