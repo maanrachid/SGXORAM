@@ -9,7 +9,7 @@
 #define ENCLAVESIZE 64000000
 #define PAGESIZE 4096
 #define P 1.0
-#define ENCRYPT_LIB 2
+#define ENCRYPT_LIB 1
 //typedef long long Block;
 
 

@@ -11,7 +11,7 @@
 #define STACH_LIMIT 100000
 #define Z 4
 #define PAGESIZE 4096
-#define ENCRYPT_LIB 2
+#define ENCRYPT_LIB 1
 //typedef long long Block;
 
 

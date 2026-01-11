@@ -21,7 +21,7 @@ This will create a new bin file in linux/installer/bin
 
 
 Wolfssl OR IPP should be installed for encryption and decryption
-between the client and the enclave.
+between the client and the enclave. THERE IS NO SUPPORT FOR THIS, SO WE HAD TO CHNAGE IT TO A SIMPLE XOR
 
 
 
@@ -62,8 +62,15 @@ Example : client 127.0.0.1 3333 100000 10000
 
 
 
+
 Encryption & Decryption
 -----------------------
+
+
+
+(2025) THE ENCRYPTION WITH WOLFSSL OR IPP DOES NOT WORK ANYMORE. THE SUPPORT TO THIS CODE IS NOT AVAILABLE SO I CHANGED THE ENCRYPTION TO SIMPLE XOR (OPTION 1).  
+
+
 Encryption is done using wolfssl or using IPP. you can choose one of them. Each of them has 
 2 versions: ONE for the enclave, and ONE for the untrusted code. In our paper, we use IPP.
 

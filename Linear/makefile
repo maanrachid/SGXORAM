@@ -17,8 +17,8 @@ TARGET_LIB_ENCLAVE = $(IPP_LIB_Enclave)
 client:	server
 	g++  -I$(INC) -I$(IPPinc)    -I$(WOLF_DIR) -I$(WOLF_CRYPT) -c client.c -o client.o
 	g++  -I$(INC) -I$(IPPinc)    -I$(WOLF_DIR) -I$(WOLF_CRYPT) -c clientOneByOne.c -o clientOneByOne.o
-	g++  client.o -o  client  -L $(IPPPath)   -l$(TARGET_LIB_CLIENT) 
-	g++ clientOneByOne.o -o clientOneByOne -L $(IPPPath)  -l$(TARGET_LIB_CLIENT)
+	g++  client.o -o  client 
+	g++ clientOneByOne.o -o clientOneByOne
 
 
 server: clean
@@ -29,7 +29,7 @@ server: clean
 	sgxsdk/bin/x64/sgx_edger8r --trusted Enclave.edl --search-path ./ --search-path sgxsdk/include
 	g++ -m64 -O2 -nostdinc -fvisibility=hidden -fpie -fstack-protector  -Isgxsdk/include -Isgxsdk/include/tlibc -Isgxsdk/include/stlport -c Enclave_t.c -o Enclave_t.o
 	g++ -m64 -O2 -nostdinc -fvisibility=hidden -fpie -fstack-protector -I$(INC) -I$(IPPinc)  -IInclude -IEnclave -Isgxsdk/include -Isgxsdk/include/tlibc -Isgxsdk/include/stlport -I$(WOLF_DIR) -I$(WOLF_CRYPT) -D$(WOLF_D) -std=c++03 -nostdinc++ -c Enclave.cpp -o Enclave.o
-	g++ Enclave_t.o Enclave.o -o enclave.so -m64 -O2 -Wl,--no-undefined -nostdlib -nodefaultlibs -nostartfiles -Lsgxsdk/lib64 -Wl,--whole-archive -lsgx_trts_sim  -Wl,--no-whole-archive -Wl,--start-group -lsgx_tstdc -lsgx_tstdcxx -lsgx_tcrypto -lsgx_tservice_sim -L$(WOLF_LIB_Enclave_PATH) -l$(TARGET_LIB_ENCLAVE)  -Wl,--end-group -Wl,-Bstatic -Wl,-Bsymbolic -Wl,--no-undefined -Wl,-pie,-eenclave_entry -Wl,--export-dynamic -Wl,--defsym,__ImageBase=0 -Wl,--version-script=Enclave.lds
+	g++ Enclave_t.o Enclave.o -o enclave.so -m64 -O2 -Wl,--no-undefined -nostdlib -nodefaultlibs -nostartfiles -Lsgxsdk/lib64 -Wl,--whole-archive -lsgx_trts_sim  -Wl,--no-whole-archive -Wl,--start-group -lsgx_tstdc -lsgx_tcrypto -lsgx_tservice_sim -L$(WOLF_LIB_Enclave_PATH) -l$(TARGET_LIB_ENCLAVE)  -Wl,--end-group -Wl,-Bstatic -Wl,-Bsymbolic -Wl,--no-undefined -Wl,-pie,-eenclave_entry -Wl,--export-dynamic -Wl,--defsym,__ImageBase=0 -Wl,--version-script=Enclave.lds
 	sgxsdk/bin/x64/sgx_sign sign -key Enclave_private.pem -enclave enclave.so -out enclave.signed.so -config Enclave.config.xml
 
 clean:

@@ -765,7 +765,7 @@ void encryptServerBlock(Block* b){
   const int src_len= sizeof(Block)-4; //size of array
   uint8_t *p_ctr;   // initialization vector
   const int ctr_inc_bits=8;
-  Block *p_dst=new Block();
+  Block *p_dst=(Block*) malloc(sizeof(Block));
 
 
   InitVectorStr s= initVector;
@@ -787,7 +787,7 @@ void decryptServerBlock(Block* b){
   const int src_len= sizeof(Block)-4; //size of array
   uint8_t *p_ctr;   // initialization vector
   const int ctr_inc_bits=8;
-  Block *p_dst=new Block();
+  Block *p_dst=(Block*) malloc (sizeof(Block));
 
   InitVectorStr s;s=s+ b->getIV();
   //printf("Decoding with IV=%d\n",b->getIV());

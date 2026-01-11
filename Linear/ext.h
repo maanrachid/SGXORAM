@@ -9,7 +9,7 @@
 #define BUFFERSIZE 500
 #define ELEMENTNUM 4
 #define ENCLAVESIZE 100000
-#define ENCRYPT_LIB 2 // 1 silly xor , 2 IPP AES_CBC, 3 Wolfssl AES_CBC  
+#define ENCRYPT_LIB 1 // 1 silly xor , 2 IPP AES_CBC, 3 Wolfssl AES_CBC  
 
 
 //typedef long long Block;

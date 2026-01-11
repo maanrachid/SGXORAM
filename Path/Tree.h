@@ -12,7 +12,7 @@ using namespace std;
 
 int gg = 0;
 tree_node** links_to_leaves;
-tree_node_aux*** links_to_leaves_aux=new tree_node_aux**[TREES];
+tree_node_aux*** links_to_leaves_aux=(tree_node_aux***)malloc(sizeof(tree_node_aux**)*TREES);
 int leaf_count=0;
 int leaf_count_aux[TREES];
 int stop_rec=false;
@@ -26,10 +26,10 @@ void  create_tree_rec(int level,tree_node* root,int n){
   }
    
   if (level>0){    
-    root->left = new tree_node();
+    root->left = (tree_node*)malloc(sizeof(tree_node));
     //root->left->temp=gg++;
     root->left->parent = root;
-    root->right=new tree_node();
+    root->right=  (tree_node*)malloc(sizeof(tree_node));
     //root->right->temp=gg++;
     root->right->parent=root;
     //    if (root->temp==1) cout << "root "<< endl;
@@ -51,10 +51,10 @@ void  create_tree_rec_aux(int level,tree_node_aux* root,int n,int index){
   }
    
   if (level>0){    
-    root->left = new tree_node_aux();
+    root->left = (tree_node_aux*)malloc(sizeof( tree_node_aux));
     //root->left->temp=gg++;
     root->left->parent = root;
-    root->right=new tree_node_aux();
+    root->right= (tree_node_aux*)malloc(sizeof( tree_node_aux));;
     //root->right->temp=gg++;
     root->right->parent=root;
     //    if (root->temp==1) cout << "root "<< endl;
@@ -86,8 +86,8 @@ void traverse(tree_node_aux *root){
 tree_node *create_tree(int n){
   int log_n = log(n);
   //cout<<log_n<<endl;
-  links_to_leaves = new tree_node*[n];
-  tree_node* ptr = new tree_node();
+  links_to_leaves = (tree_node**) malloc(n * sizeof(tree_node*));
+  tree_node* ptr = (tree_node*) malloc(sizeof(tree_node));
   gg=1;
   //ptr->temp=gg++;
   ptr->parent=NULL;
@@ -104,8 +104,8 @@ tree_node *create_tree(int n){
 tree_node_aux *create_tree_aux(int n,int index){
   int log_n = log(n);
   //cout<<log_n<<endl;
-  links_to_leaves_aux[index] = new tree_node_aux*[n];
-  tree_node_aux* ptr = new tree_node_aux();
+  links_to_leaves_aux[index] = (tree_node_aux**)malloc(n*sizeof(tree_node_aux*));
+  tree_node_aux* ptr = (tree_node_aux*)malloc(sizeof(tree_node_aux));
   gg=1;
   //ptr->temp=gg++;
   ptr->parent=NULL;
